@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  if filter=="year"
+    form(action='/year',method='get')
+      label(for="year") Select a Year 
+      select(name="year")
+        option(value=0 selected) select a year
+        each item in cars
+          option(value=item.year) #{item.year}
+        else
+          option(value=0) no cars
+        input(type='submit',value='Filter')
+  else if filter == "make"
+    form(action='/make',method='get')
+      label(for="make") Select a make 
+      select(name="make")
+        option(value=0 selected) select a car make
+        each item in cars
+          option(value=item.make) #{item.make}
+        else
+          option(value=0) no cars
+        input(type='submit',value='Filter')
+  else if filter == "model"
+    form(action='/model',method='get')
+      label(for="model") Select a model 
+      select(name="model")
+        option(value=0 selected) select a car model
+        each item in cars
+          option(value=item.model) #{item.model}
+        else
+          option(value=0) no cars
+        input(type='submit',value='Filter')
+  br
+  h2 Filtered Cars
+  p Name Year Make Model
+  each item in cars
+    p #{item.name} #{item.year} #{item.make} #{item.model}
+  else
+    p no cars
